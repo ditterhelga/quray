@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quray - Spatial Music Instrument</title>
+    <meta
+      name="description"
+      content="Touch nothing, shape everything. Quray is a stable and precise spatial instrument for real performance."
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/brb7wgl.css" />
+    <script>
+      tailwind = {
+        config: {
+          theme: {
+            extend: {
+              colors: {
+                quray: {
+                  1: "#350166",
+                  2: "#5521DA",
+                  3: "#9B06DE",
+                  4: "#DC24A7",
+                  5: "#FE3A86"
+                }
+              }
+            }
+          }
+        }
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <script>
+      (function () {
+        function reveal() {
+          document.body.classList.add("is-ready");
+        }
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", reveal);
+        else reveal();
+      })();
+    </script>
+    <header id="site-header" class="site-header fixed left-0 right-0 top-0 z-50 pt-[64px]">
+      <div class="site-header-shell site-container grid min-h-12 grid-cols-[auto_1fr] items-center gap-4 py-1">
+        <a href="./index.html" aria-label="Quray home" class="inline-flex items-center opacity-95 hover:opacity-100 transition">
+          <img src="./assets-images/Quray_logo.svg" alt="Quray" class="brand-logo h-6 w-auto md:h-7" />
+        </a>
+
+        <nav aria-label="Primary" class="justify-self-end">
+          <ul class="flex items-center justify-end gap-5 text-[20px] tracking-wide md:gap-8">
+            <li><a class="nav-link rounded-full px-2 py-1.5" href="./index.html#product-experience">Product</a></li>
+            <li><a class="nav-link rounded-full px-2 py-1.5" href="./about.html">About</a></li>
+            <li><a class="nav-link rounded-full px-2 py-1.5" href="./contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section
+        data-hero-spatial
+        class="hero-spatial relative overflow-clip"
+      >
+        <div class="hero-viewport site-container">
+          <div class="hero-image-stage">
+            <div class="hero-scene-darken" aria-hidden="true"></div>
+            <img
+              class="hero-image"
+              src="./assets/images/Quray-hand-end.png"
+              alt="Quray instrument and hand interaction"
+            />
+          </div>
+          <div class="hero-message">
+            <div class="hero-title-block">
+              <h1 class="title-text hero-title text-balance text-[80px] leading-[82px]">
+                <span class="block text-white">Touch nothing</span>
+                <span class="hero-gradient-line block">shape everything</span>
+              </h1>
+            </div>
+            <p class="hero-subtext hero-subtext-layout">
+              Play sound in the air. No touch. No buttons.
+            </p>
+            <a href="./early-access.html" class="hero-main-cta hero-cta-layout inline-flex h-[80px] items-center gap-2 rounded-full px-12 text-[24px] tracking-[0.01em] text-white">
+              Request early access
+              <span aria-hidden="true" class="hero-cta-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="product-experience" class="border-t border-white/15 bg-[#05040b]">
+        <div class="section-shell site-container py-12">
+          <p class="text-white/75">Product sections continue here in the next step.</p>
+        </div>
+      </section>
+
+      <section class="next-section site-container">
+        <h2 class="title-text next-section-title">
+          A new performative instrument where movement shapes sound
+        </h2>
+        <div class="next-section-media">
+          <div class="placeholder-card" role="img" aria-label="Placeholder visual one"></div>
+          <div class="placeholder-card" role="img" aria-label="Placeholder visual two"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./vendor/lenis.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

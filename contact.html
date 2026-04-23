@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Quray</title>
+    <link rel="stylesheet" href="https://use.typekit.net/brb7wgl.css" />
+    <script>
+      tailwind = {
+        config: {
+          theme: {
+            extend: {
+              colors: {
+                quray: {
+                  1: "#350166",
+                  2: "#5521DA",
+                  3: "#9B06DE",
+                  4: "#DC24A7",
+                  5: "#FE3A86"
+                }
+              }
+            }
+          }
+        }
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <script>
+      (function () {
+        function reveal() {
+          document.body.classList.add("is-ready");
+        }
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", reveal);
+        else reveal();
+      })();
+    </script>
+    <header class="site-header fixed left-0 right-0 top-0 z-50 pt-[64px]">
+      <div class="site-header-shell site-container grid min-h-12 grid-cols-[auto_1fr_auto] items-center gap-4 py-1">
+        <a href="./index.html" aria-label="Quray home" class="inline-flex items-center opacity-95 hover:opacity-100 transition">
+          <img src="./assets-images/Quray_logo.svg" alt="Quray" class="h-6 w-auto md:h-7" />
+        </a>
+        <nav aria-label="Primary">
+          <ul class="flex items-center justify-center gap-1 text-sm tracking-wide">
+            <li><a class="nav-link rounded-full px-3 py-2" href="./index.html#product-experience">Product</a></li>
+            <li><a class="nav-link rounded-full px-3 py-2" href="./about.html">About</a></li>
+            <li><a class="nav-link rounded-full px-3 py-2" href="./contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="hidden min-w-[220px] justify-end md:flex">
+          <a
+            id="header-cta"
+            href="./early-access.html"
+            class="cta-chip pointer-events-none inline-flex -translate-y-2 items-center rounded-full px-4 py-2 text-xs tracking-wide text-white opacity-0 transition duration-200"
+            >Request early access</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="section-shell site-container pb-20 pt-36">
+      <h1 class="text-5xl tracking-tight md:text-7xl">Contact</h1>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-white/80">
+        This page will contain artist inquiries, demos, and support channels. For now, use early access as the primary contact path.
+      </p>
+    </main>
+
+    <script src="./vendor/lenis.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
