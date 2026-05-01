@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://use.typekit.net/brb7wgl.css" />
+    <link rel="stylesheet" href="assets/fonts/cabinet-grotesk.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -39,6 +40,32 @@
         },
       };
     </script>
+    <style>
+      @keyframes pearl-drift {
+        from { background-position: 0% 44%; }
+        to   { background-position: 240% 56%; }
+      }
+
+      .text-pearl {
+        background-image: linear-gradient(
+          110deg,
+          #f0ecff 0%,
+          #c4b5fd 16%,
+          #e2d9ff 32%,
+          #d8b4fe 48%,
+          #bfb8ff 64%,
+          #e9e4ff 82%,
+          #f0ecff 100%
+        );
+        background-size: 500% 500%;
+        background-position: 0% 44%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: brightness(1.03) saturate(1.12);
+        animation: pearl-drift 44s ease-in-out infinite alternate;
+      }
+    </style>
   </head>
   <body
     class="mx-auto flex min-h-screen w-full max-w-[1280px] flex-col bg-black antialiased text-white 2xl:max-w-[1440px]"
@@ -70,8 +97,8 @@
           >
             <h1
               id="hero-heading"
-              class="max-w-full text-center text-[clamp(2.25rem,11vw,9rem)] font-black uppercase leading-[0.95] text-white sm:leading-[0.98] xl:text-[144px] xl:leading-[132px]"
-              style="font-family: degular-display, degular, 'Helvetica Neue', system-ui, sans-serif; font-weight: 900; font-variation-settings: 'wght' 950; opacity: 0.18; letter-spacing: 8px; -webkit-text-stroke: 0.55px currentColor; text-rendering: geometricPrecision;"
+              class="text-pearl max-w-full text-center text-[clamp(2rem,9.5vw,7.75rem)] font-black uppercase leading-[0.95] text-white sm:leading-[0.98] xl:text-[128px] xl:leading-[118px]"
+              style="font-family: 'CabinetGrotesk-Black', degular-display, degular, 'Helvetica Neue', system-ui, sans-serif; font-weight: 900; opacity: 0.18; letter-spacing: 8px; -webkit-text-stroke: 0.55px currentColor; text-rendering: geometricPrecision;"
             >
               <span class="block">Touch nothing</span>
               <span class="block">Shape everything</span>
@@ -95,10 +122,22 @@
             draggable="false"
             class="hero-layer-hand pointer-events-none absolute left-0 top-0 z-[3] h-full w-full select-none object-cover object-top scale-90 origin-top"
           />
-          <!-- z-4: dotted surface at bottom of the second screen -->
+          <!-- z-4: second-screen plate — fades in with dots (hidden until then) -->
+          <img
+            id="hero-back-plate"
+            src="assets/images/back.png"
+            alt=""
+            width="3684"
+            height="2304"
+            draggable="false"
+            class="pointer-events-none absolute inset-0 z-[4] h-full w-full select-none object-cover object-top"
+            style="opacity:0;"
+            aria-hidden="true"
+          />
+          <!-- z-5: dotted surface at bottom of the second screen -->
           <div
             id="hero-dotted-wrap"
-            class="pointer-events-none absolute z-[4] opacity-0 overflow-hidden"
+            class="pointer-events-none absolute z-[5] opacity-0 overflow-hidden"
             style="left:calc(50% - 50vw); width:100vw; top:10%; bottom:0; -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 78%, rgba(0,0,0,0.85) 90%, rgba(0,0,0,0) 100%); mask-image:linear-gradient(to bottom, #000 0%, #000 78%, rgba(0,0,0,0.85) 90%, rgba(0,0,0,0) 100%);"
             aria-hidden="true"
           >
@@ -108,12 +147,12 @@
               aria-hidden="true"
             ></div>
           </div>
-          <!-- z-5: reveal — fades in within the pinned scene once images have exited -->
-          <div id="hero-reveal" style="position:absolute; top:calc(50% - 28px); left:0; right:0; z-index:5; text-align:center; padding:0 16px;">
-            <p id="hero-reveal-text" style="color:#ffffff; font-size:40px; line-height:1.2; margin-bottom:36px; font-family:degular, 'Helvetica Neue', system-ui, sans-serif; font-weight:400; opacity:0; transform:translateY(24px);">
+          <!-- z-6: reveal — fades in within the pinned scene once images have exited -->
+          <div id="hero-reveal" style="position:absolute; top:calc(50% - 40px); left:0; right:0; z-index:6; text-align:center; padding:0 16px;">
+            <p id="hero-reveal-text" style="color:#ffffff; font-size:40px; line-height:1.2; margin-bottom:52px; font-family:'CabinetGrotesk-Light', degular, 'Helvetica Neue', system-ui, sans-serif; font-weight:300; opacity:0; transform:translateY(24px);">
               Play sound in the air. No touch. No buttons.
             </p>
-            <a id="hero-reveal-button" href="early-access.html" style="display:inline-flex; align-items:center; justify-content:center; background:#4701A9; color:white; padding:24px 48px; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:400; text-transform:uppercase; letter-spacing:0.05em; text-decoration:none; line-height:1; opacity:0; transform:translateY(24px);">
+            <a id="hero-reveal-button" href="early-access.html" style="display:inline-flex; align-items:center; justify-content:center; background:rgba(71,1,169,0.6); color:white; padding:24px 48px; font-family:'CabinetGrotesk-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:500; text-transform:uppercase; letter-spacing:0.05em; text-decoration:none; line-height:1; opacity:0; transform:translateY(24px);">
               BE THE FIRST TO TRY
             </a>
           </div>
@@ -174,10 +213,25 @@
 
       </div>
 
-      <!-- Spacer sections for scroll testing -->
-      <section class="min-h-screen w-full bg-black" aria-hidden="true"></section>
-      <section class="min-h-screen w-full bg-[#050505]" aria-hidden="true"></section>
-      <section class="min-h-screen w-full bg-black" aria-hidden="true"></section>
+      <section id="screen3-field" class="relative h-screen w-full overflow-hidden bg-black" style="margin-top:4.5rem;" aria-label="Quray field animation">
+        <canvas id="screen3-canvas" class="absolute bottom-0 left-0 block h-auto w-full"></canvas>
+      </section>
+
+      <section
+        id="quray-setup-section"
+        class="relative overflow-hidden bg-black"
+        style="left:calc(50% - 50vw); width:100vw; min-height:100dvh;"
+        aria-label="Quray setup"
+      >
+        <img
+          src="assets/images/Quray-setup.png"
+          alt=""
+          width="3840"
+          height="2160"
+          draggable="false"
+          class="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
+        />
+      </section>
     </main>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
@@ -205,6 +259,7 @@
       var revealBtn   = document.querySelector('#hero-reveal-button');
       var dottedWrap  = document.querySelector('#hero-dotted-wrap');
       var dottedHost  = document.querySelector('#hero-dotted-surface');
+      var backPlate     = document.querySelector('#hero-back-plate');
 
       [bgImg, device, hand, revealText, revealBtn].forEach(function (el) {
         el.style.willChange = 'transform';
@@ -285,10 +340,10 @@
         var dotTexture = createRoundedSquareTexture();
 
         var material = new THREE.PointsMaterial({
-          size: 11.5,
+          size: 13,
           vertexColors: true,
           transparent: true,
-          opacity: 0.85,
+          opacity: 1,
           sizeAttenuation: true,
           map: dotTexture || null,
           depthWrite: false
@@ -353,20 +408,194 @@
         };
       }
 
+      function initScreen3Field() {
+        var canvas = document.getElementById('screen3-canvas');
+        if (!canvas) return null;
+        var fieldSection = document.getElementById('screen3-field');
+        var gl = canvas.getContext('webgl');
+        if (!gl) return null;
+
+        var vs = "\nattribute vec2 position;\nvarying vec2 vUv;\nvoid main(){\n  vUv = position * 0.5 + 0.5;\n  gl_Position = vec4(position, 0.0, 1.0);\n}";
+
+        var fsImage = "\nprecision highp float;\nvarying vec2 vUv;\nuniform sampler2D uTex;\nuniform float u_imgScale;\nvoid main(){\n  float canvasY = 1.0 - vUv.y;\n  float imgY = (canvasY - (1.0 - u_imgScale)) / u_imgScale;\n  if(imgY < 0.0 || imgY > 1.0){ gl_FragColor = vec4(0.0,0.0,0.0,1.0); return; }\n  gl_FragColor = texture2D(uTex, vec2(vUv.x, imgY));\n}";
+
+        var fsField = "\nprecision highp float;\nuniform float u_time;\nuniform vec2 u_resolution;\nuniform float u_imgScale;\nuniform vec2 u_mouse;\n\nfloat hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123); }\n\nfloat noise(vec2 p){\n  vec2 i=floor(p); vec2 f=fract(p);\n  vec2 u=f*f*(3.0-2.0*f);\n  return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),\n             mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);\n}\n\nfloat fbm(vec2 p){\n  float v = 0.0;\n  float a = 0.5;\n  for(int i=0; i<4; i++){\n    v += a * noise(p);\n    p  = p * 2.1 + vec2(1.7, 9.2);\n    a *= 0.5;\n  }\n  return v;\n}\n\nvoid main(){\n  vec2 uv = gl_FragCoord.xy / u_resolution.xy;\n\n  float coneBottom = u_imgScale * 0.25;\n  float coneTop    = u_imgScale * 1.55;\n  float yNorm = clamp((uv.y - coneBottom) / (coneTop - coneBottom), 0.0, 1.0);\n  float expand = pow(yNorm, 0.55);\n  float halfW = mix(0.24, 0.72, expand);\n  float dist = abs(uv.x - 0.5);\n  float edgeFade = smoothstep(halfW, halfW - 0.07, dist);\n  float cy = u_imgScale * -0.05;\n  float dx2 = (uv.x - 0.5) / 0.58;\n  float dy2 = (uv.y - cy) / 0.80;\n  float arcFade = smoothstep(1.02, 0.88, dx2*dx2 + dy2*dy2);\n  float bottomFade = smoothstep(0.0, 0.18, yNorm);\n  float topFade = smoothstep(1.0, 0.25, yNorm);\n  float mask = edgeFade * arcFade * bottomFade * topFade;\n  if(mask < 0.001){ gl_FragColor = vec4(0.0); return; }\n\n  vec2 mouseUV = u_mouse / u_resolution.xy;\n  mouseUV.y = 1.0 - mouseUV.y;\n  vec2 toMouse = uv - mouseUV;\n  float mouseDist = length(toMouse);\n  float pushStrength = smoothstep(0.0, 0.3, mouseDist) < 1.0 ? \n    0.15 * (1.0 - smoothstep(0.0, 0.3, mouseDist)) : 0.0;\n  vec2 mouseDisplace = -normalize(toMouse + vec2(0.0001)) * pushStrength * 0.25;\n\n  vec2 displacedCoord = gl_FragCoord.xy + mouseDisplace * u_resolution.xy;\n  vec2 c = (displacedCoord * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);\n  float depth = 1.0 / (c.y + 1.15);\n  vec2 g = vec2(c.x * depth, depth + u_time * 0.15);\n\n  float n = fbm(g * 2.5);\n  float base_n = noise(g * 3.5);\n  float dx = uv.x - 0.5;\n  float arcBend = dx * dx * 3.0;\n  float ripples = sin((g.y - arcBend) * 18.0 + base_n * 8.0 + u_time * 0.5);\n  float topoLine = smoothstep(0.03, 0.0, abs(ripples));\n\n  vec3 col1 = vec3(0.10, 0.10, 1.00);\n  vec3 col2 = vec3(0.55, 0.00, 1.00);\n  vec3 dark  = vec3(0.01, 0.00, 0.06);\n\n  float brightness = pow(n, 1.1);\n  vec3 col = mix(dark, mix(col1, col2, n), brightness * 1.3);\n  col += topoLine * vec3(0.9, 0.3, 1.0) * depth * 0.5;\n\n  float fade = smoothstep(0.1, -1.0, c.y);\n  col *= (1.0 - length(c) * 0.45) * (1.0 - fade);\n\n  float alphaScale = mix(0.65, 0.82, yNorm) * topFade;\n  gl_FragColor = vec4(col * mask, mask * alphaScale);\n}";
+
+        function makeShader(type, src) {
+          var shader = gl.createShader(type);
+          gl.shaderSource(shader, src);
+          gl.compileShader(shader);
+          if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            console.error('[screen3] Shader compile failed:', gl.getShaderInfoLog(shader));
+            return null;
+          }
+          return shader;
+        }
+
+        function makeProgram(vsSrc, fsSrc) {
+          var program = gl.createProgram();
+          var v = makeShader(gl.VERTEX_SHADER, vsSrc);
+          var f = makeShader(gl.FRAGMENT_SHADER, fsSrc);
+          if (!v || !f) return null;
+          gl.attachShader(program, v);
+          gl.attachShader(program, f);
+          gl.linkProgram(program);
+          if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return null;
+          return program;
+        }
+
+        var buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+
+        var progImg = makeProgram(vs, fsImage);
+        var progField = makeProgram(vs, fsField);
+        if (!progImg || !progField) return;
+
+        var tex = gl.createTexture();
+        var image = new Image();
+        var imageSrc = 'assets/images/field-screen3-source.png';
+        image.onerror = function (err) {
+          console.error('[screen3] Image failed to load:', imageSrc, err);
+        };
+
+        var rafId = 0;
+        var isActive = false;
+        var observer = null;
+
+        function stopRender() {
+          isActive = false;
+          cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+
+        image.onload = function () {
+          var extraTop = 0.65;
+          var cssW = fieldSection ? (fieldSection.clientWidth || window.innerWidth) : window.innerWidth;
+          var cssH = fieldSection ? (fieldSection.clientHeight || window.innerHeight) : window.innerHeight;
+          var isMobile = window.matchMedia('(max-width: 768px)').matches;
+          var dpr = Math.min(window.devicePixelRatio || 1, 2);
+          var minRenderWidth = isMobile ? 480 : 960;
+          var minRenderHeight = isMobile ? 680 : 1000;
+          var idealWidth = Math.round(cssW * dpr);
+          var sourceW = image.naturalWidth;
+          var sourceH = image.naturalHeight;
+          var renderWidth = Math.min(sourceW, Math.max(minRenderWidth, idealWidth));
+          var aspect = sourceH / sourceW;
+          var renderHeight = Math.round(renderWidth * aspect * (1 + extraTop));
+          var maxReasonableHeight = Math.round(cssH * dpr * 2.5);
+          if (renderHeight > maxReasonableHeight) {
+            var scaleDown = maxReasonableHeight / renderHeight;
+            renderWidth = Math.max(minRenderWidth, Math.round(renderWidth * scaleDown));
+            renderHeight = Math.max(minRenderHeight, Math.round(renderHeight * scaleDown));
+          }
+          canvas.width = renderWidth;
+          canvas.height = renderHeight;
+          var imgScale = 1.0 / (1 + extraTop);
+
+          gl.viewport(0, 0, canvas.width, canvas.height);
+          gl.bindTexture(gl.TEXTURE_2D, tex);
+          try {
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+          } catch (e) {
+            console.error('[screen3] texImage2D failed. This is usually a security/CORS/protocol issue:', e);
+            return;
+          }
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.enable(gl.BLEND);
+          gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+          var tL = gl.getUniformLocation(progField, 'u_time');
+          var rL = gl.getUniformLocation(progField, 'u_resolution');
+          var sLf = gl.getUniformLocation(progField, 'u_imgScale');
+          var sLi = gl.getUniformLocation(progImg, 'u_imgScale');
+          var mL = gl.getUniformLocation(progField, 'u_mouse');
+
+          var mouseX = canvas.width * 0.5;
+          var mouseY = canvas.height * 0.5;
+          var smoothX = mouseX;
+          var smoothY = mouseY;
+
+          canvas.addEventListener('mousemove', function (e) {
+            var rect = canvas.getBoundingClientRect();
+            var scaleX = canvas.width / rect.width;
+            var scaleY = canvas.height / rect.height;
+            mouseX = (e.clientX - rect.left) * scaleX;
+            mouseY = (e.clientY - rect.top) * scaleY;
+          });
+
+          function enablePos(program) {
+            var p = gl.getAttribLocation(program, 'position');
+            gl.enableVertexAttribArray(p);
+            gl.vertexAttribPointer(p, 2, gl.FLOAT, false, 0, 0);
+          }
+
+          function render(t) {
+            if (!isActive) return;
+            smoothX += (mouseX - smoothX) * 0.08;
+            smoothY += (mouseY - smoothY) * 0.08;
+
+            gl.clearColor(0, 0, 0, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            gl.useProgram(progImg);
+            enablePos(progImg);
+            gl.uniform1f(sLi, imgScale);
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+            gl.useProgram(progField);
+            enablePos(progField);
+            gl.uniform1f(tL, t * 0.001);
+            gl.uniform2f(rL, canvas.width, canvas.height);
+            gl.uniform1f(sLf, imgScale);
+            gl.uniform2f(mL, smoothX, smoothY);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+            rafId = requestAnimationFrame(render);
+          }
+
+          function startRender() {
+            if (isActive) return;
+            isActive = true;
+            rafId = requestAnimationFrame(render);
+          }
+
+          if ('IntersectionObserver' in window && fieldSection) {
+            observer = new IntersectionObserver(function (entries) {
+              var entry = entries[0];
+              if (!entry) return;
+              if (entry.isIntersecting) startRender();
+              else stopRender();
+            }, { threshold: 0.05 });
+            observer.observe(fieldSection);
+          } else {
+            startRender();
+          }
+        };
+        image.src = imageSrc;
+
+        return {
+          destroy: function () {
+            stopRender();
+            if (observer) observer.disconnect();
+          }
+        };
+      }
+
       var dottedSurface = createDottedSurface(dottedHost);
+      var screen3Field = initScreen3Field();
       gsap.set(heading, { transformOrigin: 'center center' });
 
-      /* ── PIN hero-section for 3× viewport of scroll ────────────────────
-         Timeline (3 virtual units = 300% scroll distance):
-           0   → 1.5  images rush upward and fully exit the viewport
-           0   → 1.0  heading fades from dim → full opacity, scales 1 → 0.85
-           1.1 → 1.9  reveal appears in two steps: text, then button
-           2.3 → 3.0  hold (everything settled, user reads before scrolling on) */
+      /* ── PIN hero-section (scroll-scrubbed timeline) ─────────────────── */
       var tl = gsap.timeline({
         scrollTrigger: {
           trigger: '#hero-section',
           start: 'top top',
-          end: '+=240%',
+          end: '+=110%',
           pin: true,
           pinSpacing: true,
           scrub: 1.5,
@@ -376,23 +605,31 @@
 
       /* Images rush upward together — all layers move in sync */
       tl.to(bgImg,  { y: '-115vh', ease: 'none', duration: 1.5 }, 0);
-      tl.to(device, { y: '-120vh', ease: 'none', duration: 1.5 }, 0);
-      tl.to(hand,   { y: '-115vh', ease: 'none', duration: 1.5 }, 0);
+      tl.to(device, { y: '-102vh', x: '-1.5vw', ease: 'none', duration: 1.5 }, 0);
+      tl.to(hand,   { y: '-135vh', x: '0vw', ease: 'none', duration: 1.5 }, 0);
 
       /* Heading: was dim behind images, resolves to full opacity + slight scale */
       tl.fromTo(heading,
         { opacity: 0.18, scale: 1,    y: 0   },
-        { opacity: 1,    scale: 0.85, y: -164, ease: 'none', duration: 1 },
+        { opacity: 1,    scale: 0.85, y: -196, ease: 'none', duration: 1 },
         '<'
       );
 
       /* Transition: field first (between screens), then text, then button */
       tl.fromTo(
         dottedWrap,
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, ease: 'none', duration: 0.55 },
+        { opacity: 0, y: 52 },
+        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.82 },
         0.92
       );
+      if (backPlate) {
+        tl.fromTo(
+          backPlate,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, ease: 'power2.out', duration: 1.15 },
+          0.92
+        );
+      }
 
       tl.fromTo(revealText,
         { opacity: 0, y: 24 },
@@ -406,13 +643,14 @@
         1.72
       );
 
-      /* Hold pad — keeps pin alive through the end of 300% scroll */
-      tl.to({}, { duration: 0.7 }, 2.3);
+      /* Short hold after button so user can read before next section */
+      tl.to({}, { duration: 0.58 }, 2.14);
 
       ScrollTrigger.refresh();
 
       window.addEventListener('beforeunload', function () {
         if (dottedSurface) dottedSurface.destroy();
+        if (screen3Field) screen3Field.destroy();
       });
     });
   </script>
