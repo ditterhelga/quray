@@ -98,7 +98,7 @@
             <h1
               id="hero-heading"
               class="text-pearl max-w-full text-center text-[clamp(2rem,9.5vw,7.75rem)] font-black uppercase leading-[0.95] text-white sm:leading-[0.98] xl:text-[128px] xl:leading-[118px]"
-              style="font-family: 'CabinetGrotesk-Black', degular-display, degular, 'Helvetica Neue', system-ui, sans-serif; font-weight: 900; opacity: 0.18; letter-spacing: 8px; -webkit-text-stroke: 0.55px currentColor; text-rendering: geometricPrecision;"
+              style="font-family: 'CabinetGrotesk-Black', degular-display, degular, 'Helvetica Neue', system-ui, sans-serif; font-weight: 900; opacity: 0.18; letter-spacing: 4px; -webkit-text-stroke: 0.55px currentColor; text-rendering: geometricPrecision;"
             >
               <span class="block">Touch nothing</span>
               <span class="block">Shape everything</span>
@@ -113,15 +113,17 @@
             draggable="false"
             class="hero-layer-device pointer-events-none absolute left-0 top-0 z-[2] h-full w-full select-none object-cover object-top"
           />
-          <!-- z-3 hand — same position as all other layers so composition stays aligned -->
-          <img
-            src="assets/images/quray-front.png"
-            alt=""
-            width="3684"
-            height="2304"
-            draggable="false"
-            class="hero-layer-hand pointer-events-none absolute left-0 top-0 z-[3] h-full w-full select-none object-cover object-top scale-90 origin-top"
-          />
+          <!-- z-3 hand — wrapper scale so GSAP transform on img does not wipe Tailwind scale -->
+          <div class="pointer-events-none absolute left-0 top-0 z-[3] w-full origin-top scale-[1.125]">
+            <img
+              src="assets/images/quray-front.png"
+              alt=""
+              width="3684"
+              height="2304"
+              draggable="false"
+              class="hero-layer-hand pointer-events-none relative block w-full select-none"
+            />
+          </div>
           <!-- z-4: second-screen plate — fades in with dots (hidden until then) -->
           <img
             id="hero-back-plate"
@@ -148,8 +150,8 @@
             ></div>
           </div>
           <!-- z-6: reveal — fades in within the pinned scene once images have exited -->
-          <div id="hero-reveal" style="position:absolute; top:calc(50% - 40px); left:0; right:0; z-index:6; text-align:center; padding:0 16px;">
-            <p id="hero-reveal-text" style="color:#ffffff; font-size:40px; line-height:1.2; margin-bottom:52px; font-family:'CabinetGrotesk-Light', degular, 'Helvetica Neue', system-ui, sans-serif; font-weight:300; opacity:0; transform:translateY(24px);">
+          <div id="hero-reveal" style="position:absolute; top:calc(48% - 28px); left:0; right:0; z-index:6; text-align:center; padding:0 16px;">
+            <p id="hero-reveal-text" style="color:#ffffff; font-size:40px; line-height:1.2; margin-top:0; margin-bottom:36px; font-family:'CabinetGrotesk-Light', degular, 'Helvetica Neue', system-ui, sans-serif; font-weight:300; opacity:0; transform:translateY(24px);">
               Play sound in the air. No touch. No buttons.
             </p>
             <a id="hero-reveal-button" href="early-access.html" style="display:inline-flex; align-items:center; justify-content:center; background:rgba(71,1,169,0.6); color:white; padding:24px 48px; font-family:'CabinetGrotesk-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:500; text-transform:uppercase; letter-spacing:0.05em; text-decoration:none; line-height:1; opacity:0; transform:translateY(24px);">
@@ -219,8 +221,9 @@
 
       <section
         id="quray-setup-section"
-        class="relative overflow-hidden bg-black"
+        class="relative hidden overflow-hidden bg-black"
         style="left:calc(50% - 50vw); width:100vw; min-height:100dvh;"
+        aria-hidden="true"
         aria-label="Quray setup"
       >
         <img
@@ -474,13 +477,15 @@
           var cssW = fieldSection ? (fieldSection.clientWidth || window.innerWidth) : window.innerWidth;
           var cssH = fieldSection ? (fieldSection.clientHeight || window.innerHeight) : window.innerHeight;
           var isMobile = window.matchMedia('(max-width: 768px)').matches;
-          var dpr = Math.min(window.devicePixelRatio || 1, 2);
+          /* Balance sharpness vs GPU: cap DPR and max framebuffer width (still looks crisp CSS-scaled). */
+          var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+          var maxCanvasWidth = isMobile ? 960 : 1680;
           var minRenderWidth = isMobile ? 480 : 960;
           var minRenderHeight = isMobile ? 680 : 1000;
           var idealWidth = Math.round(cssW * dpr);
           var sourceW = image.naturalWidth;
           var sourceH = image.naturalHeight;
-          var renderWidth = Math.min(sourceW, Math.max(minRenderWidth, idealWidth));
+          var renderWidth = Math.min(sourceW, maxCanvasWidth, Math.max(minRenderWidth, idealWidth));
           var aspect = sourceH / sourceW;
           var renderHeight = Math.round(renderWidth * aspect * (1 + extraTop));
           var maxReasonableHeight = Math.round(cssH * dpr * 2.5);
@@ -610,7 +615,7 @@
 
       /* Heading: was dim behind images, resolves to full opacity + slight scale */
       tl.fromTo(heading,
-        { opacity: 0.18, scale: 1,    y: 0   },
+        { opacity: 0.18, scale: 1,    y: -56 },
         { opacity: 1,    scale: 0.85, y: -196, ease: 'none', duration: 1 },
         '<'
       );
@@ -618,9 +623,9 @@
       /* Transition: field first (between screens), then text, then button */
       tl.fromTo(
         dottedWrap,
-        { opacity: 0, y: 52 },
-        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.82 },
-        0.92
+        { opacity: 0, y: 56 },
+        { opacity: 1, y: 0, ease: 'power1.inOut', duration: 1.12 },
+        0.68
       );
       if (backPlate) {
         tl.fromTo(
