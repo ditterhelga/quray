@@ -1,112 +1,249 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quray - Spatial Music Instrument</title>
-    <meta
-      name="description"
-      content="Touch nothing, shape everything. Quray is a stable and precise spatial instrument for real performance."
+    <title>Quray</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="https://use.typekit.net/brb7wgl.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script>
-      tailwind = {
-        config: {
-          theme: {
-            extend: {
-              colors: {
-                quray: {
-                  1: "#350166",
-                  2: "#5521DA",
-                  3: "#9B06DE",
-                  4: "#DC24A7",
-                  5: "#FE3A86"
-                }
-              }
-            }
-          }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              quray: {
+                cta: '#4701A9',
+              },
+            },
+            fontFamily: {
+              nav: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+              hero: [
+                'Degular',
+                'Anton',
+                '"Helvetica Neue"',
+                'system-ui',
+                'sans-serif',
+              ],
+            },
+          },
+        },
       };
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
-    <script>
-      (function () {
-        function reveal() {
-          document.body.classList.add("is-ready");
-        }
-        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", reveal);
-        else reveal();
-      })();
-    </script>
-    <header id="site-header" class="site-header fixed left-0 right-0 top-0 z-50 pt-[64px]">
-      <div class="site-header-shell site-container grid min-h-12 grid-cols-[auto_1fr] items-center gap-4 py-1">
-        <a href="./index.html" aria-label="Quray home" class="inline-flex items-center opacity-95 hover:opacity-100 transition">
-          <img src="./assets-images/Quray_logo.svg" alt="Quray" class="brand-logo h-6 w-auto md:h-7" />
-        </a>
+  <body
+    class="mx-auto flex min-h-screen w-full max-w-[1280px] flex-col bg-black antialiased text-white 2xl:max-w-[1440px]"
+  >
+    <main class="relative flex w-full flex-col">
+      <div id="hero-stage" class="relative w-full">
 
-        <nav aria-label="Primary" class="justify-self-end">
-          <ul class="flex items-center justify-end gap-5 text-[20px] tracking-wide md:gap-8">
-            <li><a class="nav-link rounded-full px-2 py-1.5" href="./index.html#product-experience">Product</a></li>
-            <li><a class="nav-link rounded-full px-2 py-1.5" href="./about.html">About</a></li>
-            <li><a class="nav-link rounded-full px-2 py-1.5" href="./contact.html">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <section
-        data-hero-spatial
-        class="hero-spatial relative overflow-clip"
-      >
-        <div class="hero-viewport site-container">
-          <div class="hero-image-stage">
-            <div class="hero-scene-darken" aria-hidden="true"></div>
-            <img
-              class="hero-image"
-              src="./assets/images/Quray-hand-end.png"
-              alt="Quray instrument and hand interaction"
-            />
+        <!-- ─── Hero: full viewport height, all layers inside ──────────── -->
+        <section
+          id="hero-section"
+          class="relative w-full overflow-hidden"
+          style="min-height: 100dvh"
+          aria-labelledby="hero-heading"
+        >
+          <!-- z-0 background -->
+          <img
+            src="assets/images/quray-back.png"
+            alt=""
+            width="3684"
+            height="2304"
+            draggable="false"
+            class="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-top"
+            aria-hidden="true"
+          />
+          <!-- z-1: text sits between background and foreground images -->
+          <div
+            id="hero-heading-wrap"
+            class="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center p-4"
+          >
+            <h1
+              id="hero-heading"
+              class="max-w-full text-center text-[clamp(2.25rem,11vw,9rem)] font-black uppercase leading-[0.95] text-white sm:leading-[0.98] xl:text-[144px] xl:leading-[132px]"
+              style="font-family: degular-display, degular, 'Helvetica Neue', system-ui, sans-serif; font-weight: 900; opacity: 0.18; letter-spacing: 6px"
+            >
+              <span class="block">Touch nothing</span>
+              <span class="block">Shape everything</span>
+            </h1>
           </div>
-          <div class="hero-message">
-            <div class="hero-title-block">
-              <h1 class="title-text hero-title text-balance text-[80px] leading-[82px]">
-                <span class="block text-white">Touch nothing</span>
-                <span class="hero-gradient-line block">shape everything</span>
-              </h1>
-            </div>
-            <p class="hero-subtext hero-subtext-layout">
+          <!-- z-2 device -->
+          <img
+            src="assets/images/quray-front-1.png"
+            alt=""
+            width="3684"
+            height="2304"
+            draggable="false"
+            class="hero-layer-device pointer-events-none absolute left-0 top-0 z-[2] h-full w-full select-none object-cover object-top"
+          />
+          <!-- z-3 hand — same position as all other layers so composition stays aligned -->
+          <img
+            src="assets/images/quray-front.png"
+            alt=""
+            width="3684"
+            height="2304"
+            draggable="false"
+            class="hero-layer-hand pointer-events-none absolute left-0 top-0 z-[3] h-full w-full select-none object-cover object-top scale-90 origin-top"
+          />
+          <!-- z-5: reveal — fades in within the pinned scene once images have exited -->
+          <div id="hero-reveal" style="position:absolute; top:calc(50% + 64px); left:0; right:0; z-index:5; text-align:center; padding:0 16px;">
+            <p id="hero-reveal-text" style="color:#ffffff; font-size:40px; line-height:1.2; margin-bottom:56px; font-family:degular, 'Helvetica Neue', system-ui, sans-serif; font-weight:400; opacity:0; transform:translateY(24px);">
               Play sound in the air. No touch. No buttons.
             </p>
-            <a href="./early-access.html" class="hero-main-cta hero-cta-layout inline-flex h-[80px] items-center gap-2 rounded-full px-12 text-[24px] tracking-[0.01em] text-white">
-              Request early access
-              <span aria-hidden="true" class="hero-cta-arrow">→</span>
+            <a id="hero-reveal-button" href="early-access.html" style="display:inline-flex; align-items:center; justify-content:center; background:#4701A9; color:white; padding:24px 48px; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:400; text-transform:uppercase; letter-spacing:0.05em; text-decoration:none; line-height:1; opacity:0; transform:translateY(24px);">
+              BE THE FIRST TO TRY
             </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="product-experience" class="border-t border-white/15 bg-[#05040b]">
-        <div class="section-shell site-container py-12">
-          <p class="text-white/75">Product sections continue here in the next step.</p>
-        </div>
-      </section>
+        <!-- ─── Header: floats over hero top, transparent ─────────────────── -->
+        <header class="absolute left-0 right-0 top-0 z-50">
+          <!-- Content row: max-width column, vertical dividers, left+right rails -->
+          <div
+            class="flex w-full flex-col border-l border-r border-white/30 lg:h-[88px] lg:min-h-[88px] lg:flex-row"
+          >
+            <!-- | 40px · logo · 40px | -->
+            <div
+              class="flex shrink-0 items-center justify-center border-b border-white/30 px-10 py-10 lg:border-b-0 lg:border-r"
+            >
+              <a href="./" class="block shrink-0" aria-label="Quray home">
+                <img
+                  src="assets/images/Quray_logo.svg"
+                  alt="Quray"
+                  class="h-auto w-[128px] max-w-none"
+                  width="128"
+                />
+              </a>
+            </div>
+            <!-- flexible spacer -->
+            <div
+              class="hidden min-h-0 min-w-0 flex-1 lg:flex lg:border-r lg:border-white/30"
+              aria-hidden="true"
+            ></div>
+            <!-- | 56px · nav · 56px | -->
+            <nav
+              class="flex shrink-0 flex-wrap items-center justify-center gap-x-[clamp(2rem,5vw,5rem)] gap-y-4 border-b border-white/30 px-[56px] py-10 font-nav text-[clamp(1rem,2.5vw,1.25rem)] font-normal leading-none text-white sm:gap-x-20 sm:text-[20px] lg:justify-center lg:border-b-0 lg:border-r lg:py-0"
+              aria-label="Primary"
+            >
+              <a href="product.html" class="transition-opacity hover:opacity-70">Product</a>
+              <a href="about.html"   class="transition-opacity hover:opacity-70">About</a>
+              <a href="contact.html" class="transition-opacity hover:opacity-70">Contact</a>
+            </nav>
+            <!-- | 40px · button · 40px | -->
+            <div
+              class="flex shrink-0 items-center justify-center border-b border-white/30 px-10 py-10 lg:border-b-0"
+            >
+              <a
+                href="early-access.html"
+                class="inline-flex h-[56px] items-center justify-center whitespace-nowrap bg-quray-cta px-6 text-center font-nav text-[14px] font-normal uppercase tracking-wide text-white"
+              >
+                Request early access
+              </a>
+            </div>
+          </div>
+          <!-- Full-viewport-width bottom rule only -->
+          <div
+            class="absolute bottom-0 h-px w-screen bg-white/30"
+            style="left: calc(50% - 50vw)"
+            aria-hidden="true"
+          ></div>
+        </header>
 
-      <section class="next-section site-container">
-        <h2 class="title-text next-section-title">
-          A new performative instrument where movement shapes sound
-        </h2>
-        <div class="next-section-media">
-          <div class="placeholder-card" role="img" aria-label="Placeholder visual one"></div>
-          <div class="placeholder-card" role="img" aria-label="Placeholder visual two"></div>
-        </div>
-      </section>
+      </div>
+
+      <!-- Spacer sections for scroll testing -->
+      <section class="min-h-screen w-full bg-black" aria-hidden="true"></section>
+      <section class="min-h-screen w-full bg-[#050505]" aria-hidden="true"></section>
+      <section class="min-h-screen w-full bg-black" aria-hidden="true"></section>
     </main>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      gsap.registerPlugin(ScrollTrigger);
+      
+      if (window.Lenis) {
+        var lenis = new Lenis({
+          duration: 1.15,
+          smoothWheel: true
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function (time) {
+          lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      }
 
-    <script src="./vendor/lenis.min.js"></script>
-    <script src="./main.js"></script>
+      var heroSection = document.querySelector('#hero-section');
+      var bgImg       = heroSection.querySelector('img');
+      var device      = document.querySelector('.hero-layer-device');
+      var hand        = document.querySelector('.hero-layer-hand');
+      var heading     = document.querySelector('#hero-heading');
+      var revealText  = document.querySelector('#hero-reveal-text');
+      var revealBtn   = document.querySelector('#hero-reveal-button');
+
+      [bgImg, device, hand, revealText, revealBtn].forEach(function (el) {
+        el.style.willChange = 'transform';
+      });
+
+      gsap.set(heading, { transformOrigin: 'center center' });
+
+      /* ── PIN hero-section for 3× viewport of scroll ────────────────────
+         Timeline (3 virtual units = 300% scroll distance):
+           0   → 1.5  images rush upward and fully exit the viewport
+           0   → 1.0  heading fades from dim → full opacity, scales 1 → 0.85
+           1.1 → 1.9  reveal appears in two steps: text, then button
+           2.3 → 3.0  hold (everything settled, user reads before scrolling on) */
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#hero-section',
+          start: 'top top',
+          end: '+=300%',
+          pin: true,
+          pinSpacing: true,
+          scrub: 1.5,
+          anticipatePin: 1
+        }
+      });
+
+      /* Images rush upward together — all layers move in sync */
+      tl.to(bgImg,  { y: '-115vh', ease: 'none', duration: 1.5 }, 0);
+      tl.to(device, { y: '-120vh', ease: 'none', duration: 1.5 }, 0);
+      tl.to(hand,   { y: '-115vh', ease: 'none', duration: 1.5 }, 0);
+
+      /* Heading: was dim behind images, resolves to full opacity + slight scale */
+      tl.fromTo(heading,
+        { opacity: 0.18, scale: 1,    y: 0   },
+        { opacity: 1,    scale: 0.85, y: -116, ease: 'none', duration: 1 },
+        '<'
+      );
+
+      /* Reveal: appears earlier in two scroll phases (text, then button) */
+      tl.fromTo(revealText,
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0,  ease: 'none', duration: 0.45 },
+        1.1
+      );
+
+      tl.fromTo(revealBtn,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0,  ease: 'none', duration: 0.45 },
+        1.45
+      );
+
+      /* Hold pad — keeps pin alive through the end of 300% scroll */
+      tl.to({}, { duration: 0.7 }, 2.3);
+
+      ScrollTrigger.refresh();
+    });
+  </script>
   </body>
 </html>
